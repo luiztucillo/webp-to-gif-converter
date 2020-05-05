@@ -1,5 +1,4 @@
 const multer = require('multer');
-const util = require("util");
 const path = require("path");
 
 const storage = multer.diskStorage({
@@ -7,10 +6,10 @@ const storage = multer.diskStorage({
     callback(null, path.join(`${__dirname}/../public`));
   },
   filename: (req, file, callback) => {
-    const match = ["image/png", "image/jpeg", 'image/webp'];
+    const match = ['image/webp'];
 
     if (match.indexOf(file.mimetype) === -1) {
-      const message = `${file.originalname} is invalid. Only accept png/jpeg/webp.`;
+      const message = `${file.originalname} is invalid. Only accept webp.`;
       return callback(message, null);
     }
 
@@ -19,5 +18,4 @@ const storage = multer.diskStorage({
   }
 });
 
-const upload = multer({storage}).array('images', 10);
-module.exports.uploadMiddleware = util.promisify(upload);
+module.exports.upload = multer({storage});

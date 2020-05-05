@@ -3,15 +3,20 @@ const router = express.Router();
 const path = require('path');
 const deleteFile = require('../helpers/file');
 const {convert} = require('../helpers/webp');
-const {uploadMiddleware} = require('../helpers/upload');
+const {upload} = require('../helpers/upload');
+let converting = false;
 
-router.post('/', async (req, res) => {
+router.post('/', upload.array('images'), async (req, res) => {
+
+  // if (converting) {
+  //   return res.status(400).send('Already converting. Try again later');
+  // }
+
+  converting = true;
+
   try {
-    await uploadMiddleware(req, res);
-    path.dirname('./public');
-
     if (req.files.length <= 0) {
-      return res.status(400).send(`You must select at least 1 file.`);
+      throw Error(`You must select at least 1 file.`);
     }
 
     const files = [];
@@ -21,13 +26,17 @@ router.post('/', async (req, res) => {
       await deleteFile(req.files[i].path);
     }
 
+    converting = false;
+
     return res.status(200).send(files);
   } catch (error) {
+    converting = false;
+
     if (error.code === "LIMIT_UNEXPECTED_FILE") {
       return res.status(400).send("Too many files to upload.");
     }
 
-    return res.status(400).send(`Error when trying upload many files: ${error}`);
+    return res.status(400).send(`${error}`);
   }
 });
 

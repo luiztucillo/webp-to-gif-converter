@@ -1,3 +1,4 @@
 backend/node_modules
+backend/public
 frontend/node_modules
 .idea

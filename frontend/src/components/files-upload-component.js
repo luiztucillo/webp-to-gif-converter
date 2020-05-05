@@ -35,8 +35,6 @@ export default class FilesUploadComponent extends Component {
 
     const result = await axios.post("http://localhost:8080/images", formData, {});
 
-    console.log(result);
-
     const urls = [];
     result.data.forEach(path => {
       urls.push(`http://localhost:8080${path}`);

@@ -1,0 +1,90 @@
+.Upload {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    align-items: flex-start;
+    text-align: left;
+    overflow: hidden;
+}
+
+.Files {
+    align-items: flex-start;
+    justify-items: flex-start;
+    flex: 1;
+    overflow-y: auto;
+}
+
+.Content {
+    min-height: 200px;
+    width: 100%;
+}
+
+.Dropzone {
+    margin: 0 auto;
+}
+
+.Actions {
+    display: flex;
+    flex: 1;
+    margin: 0 auto;
+    flex-direction: column;
+    margin-top: 32px;
+}
+
+.Filename {
+    margin-bottom: 8px;
+    font-size: 16px;
+    color: #555;
+}
+
+.Row {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 8px;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.ProgressWrapper {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    align-items: center;
+}
+
+button {
+    font-family: 'Roboto medium', sans-serif;
+    font-size: 14px;
+    display: inline-block;
+    height: 56px;
+    min-width: 120px;
+    padding: 6px 16px;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 0;
+    border-radius: 2px;
+    background: rgba(103, 58, 183, 1);
+    color: #fff;
+    outline: 0;
+}
+
+button:disabled {
+    background: rgb(189, 189, 189);
+    cursor: default;
+}
+
+.ImageResult {
+    max-width: 100%;
+    margin-top: 20px;
+}
