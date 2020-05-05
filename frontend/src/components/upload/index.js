@@ -72,7 +72,7 @@ export default class Upload extends Component {
     let result = '';
 
     if (state === STATE_ERROR) {
-      result = uploadProgress.body;
+      result = (<div className="Error">{uploadProgress.body}</div>);
     }
 
     if (state === STATE_DONE) {
@@ -80,11 +80,15 @@ export default class Upload extends Component {
                      src={`${BACKEND_URL}${uploadProgress.body}`}/>);
     }
 
+    if (state === STATE_CONVERTING) {
+      result = (<div className="Converting">Convertendo</div>);
+    }
+
     return (
         <div key={file.name} className="Row" data-file={file.name}>
           <span className="Filename">{`${file.name}`}</span>
           {this.renderProgress(uploadProgress)}
-          <div className={`Result ${state}`}>{result}</div>
+          <div className="Result">{result}</div>
         </div>
     );
   }

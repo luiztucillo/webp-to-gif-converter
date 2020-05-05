@@ -12,8 +12,8 @@
 .Card {
   background-color: white;
   padding: 32px;
-  width: 50%;
-  min-height: 50vh;
+  width: 90%;
+  min-height: 80vh;
   display: flex;
   align-items: center;
   justify-content: center;

@@ -40,4 +40,8 @@ router.post('/', upload.array('images'), async (req, res) => {
   }
 });
 
+router.use((error, req, res, next) => {
+  res.status(400).send(error);
+});
+
 module.exports = router;

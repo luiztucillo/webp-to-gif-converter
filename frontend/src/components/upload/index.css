@@ -84,7 +84,22 @@ button:disabled {
     cursor: default;
 }
 
-.ImageResult {
+.Result img {
     max-width: 100%;
-    margin-top: 20px;
+}
+
+.Result {
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.Result .Error {
+    background-color: darkred;
+    color: white;
+    padding: 10px;
+}
+
+.Result .Converting {
+    background-color: aqua;
+    padding: 10px;
 }
