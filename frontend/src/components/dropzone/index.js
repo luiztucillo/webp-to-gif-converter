@@ -76,6 +76,7 @@ class Dropzone extends Component {
               className="FileInput"
               type="file"
               multiple
+              accept="image/webp"
               onChange={this.onFilesAdded}
           />
           <span>Click or Drop Files</span>
