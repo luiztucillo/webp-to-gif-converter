@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import './index.css';
 import Dropzone from '../dropzone/index';
 import Progress from "../progress/index";
+import Config from '../../config';
 
 const STATE_UPLOADING = 'uploading';
 const STATE_ERROR = 'error';
@@ -9,7 +10,7 @@ const STATE_INITIAL = 'initial';
 const STATE_DONE = 'done';
 const STATE_CONVERTING = 'converting';
 
-const BACKEND_URL = 'http://localhost:8080';
+const BACKEND_URL = Config.url;
 
 export default class Upload extends Component {
   constructor(props) {
@@ -70,14 +71,14 @@ export default class Upload extends Component {
     const uploadProgress = this.state.uploadProgress[file.name];
     const state = uploadProgress ? uploadProgress.state : STATE_INITIAL;
     let result = '';
+    let src = URL.createObjectURL(file);
 
     if (state === STATE_ERROR) {
       result = (<div className="Error">{uploadProgress.body}</div>);
     }
 
     if (state === STATE_DONE) {
-      result = (<img className="ImageResult" alt={uploadProgress.body}
-                     src={`${BACKEND_URL}${uploadProgress.body}`}/>);
+      src = `${BACKEND_URL}${uploadProgress.body}`;
     }
 
     if (state === STATE_CONVERTING) {
@@ -85,25 +86,50 @@ export default class Upload extends Component {
     }
 
     return (
-        <div key={file.name} className="Row" data-file={file.name}>
-          <span className="Filename">{`${file.name}`}</span>
-          {this.renderProgress(uploadProgress)}
-          <div className="Result">{result}</div>
+        <div key={file.name} className={`Row FileRow ${state === STATE_DONE ? 'Converted' : ''}`} data-file={file.name}>
+          <div className="Preview">
+            <div className="PreviewColumn">
+              <img alt={file.name} src={src}/>
+            </div>
+            <div className="PreviewColumn">
+              <div className="Filename">{`${file.name}`}</div>
+              <button className="delete" onClick={() => {
+                const files = [...this.state.files];
+                const idx = files.indexOf(file);
+                const copy = {...this.state.uploadProgress};
+                delete copy[file.name];
+
+                if (idx >= 0) {
+                  files.splice(idx, 1);
+                  this.setState({
+                    files,
+                    generalState: files.length <= 0 ? STATE_INITIAL : this.state.generalState,
+                    uploadProgress: copy
+                  });
+                }
+
+              }}>Remover</button>
+              <div className="Result">
+                {result}
+              </div>
+            </div>
+          </div>
+          <div className="Data">
+            {this.renderProgress(uploadProgress)}
+          </div>
         </div>
     );
   }
 
   renderProgress(uploadProgress) {
-    if (uploadProgress && this.state.generalState !== STATE_INITIAL) {
-      return (
-          <div className="ProgressWrapper">
-            <Progress
-                progress={uploadProgress ? uploadProgress.percentage : 0}
-                error={uploadProgress.state === 'error'}
-            />
-          </div>
-      );
-    }
+    return (
+        <div className="ProgressWrapper">
+          <Progress
+              progress={uploadProgress ? uploadProgress.percentage : 0}
+              error={uploadProgress && uploadProgress.state === STATE_ERROR}
+          />
+        </div>
+    );
   }
 
   async uploadButtonAction() {

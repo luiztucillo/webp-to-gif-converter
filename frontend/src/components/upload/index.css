@@ -47,6 +47,28 @@
     box-sizing: border-box;
 }
 
+.FileRow {
+    background-color: #eee;
+    margin-top: 10px;
+    border-radius: 3px;
+}
+
+.FileRow.Converted {
+    background-color: lightgreen;
+}
+
+.FileRow .Preview {
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.FileRow img {
+    max-height: 100px;
+    margin-right: 10px;
+    display: flex;
+}
+
 .ProgressWrapper {
     display: flex;
     flex: 1;
@@ -59,8 +81,7 @@ button {
     font-size: 14px;
     display: inline-block;
     height: 56px;
-    min-width: 120px;
-    padding: 6px 16px;
+    width: 120px;
     line-height: 1.42857143;
     text-align: center;
     white-space: nowrap;
@@ -84,22 +105,23 @@ button:disabled {
     cursor: default;
 }
 
-.Result img {
-    max-width: 100%;
+button.delete {
+    height: 30px;
+    font-size: 12px;
+    width: 65px;
+    background-color: darkred;
 }
 
 .Result {
     font-size: 12px;
     margin-top: 5px;
+    display: block;
 }
 
 .Result .Error {
-    background-color: darkred;
-    color: white;
-    padding: 10px;
+    color: red;
 }
 
 .Result .Converting {
-    background-color: aqua;
-    padding: 10px;
+    color: darkgreen;
 }

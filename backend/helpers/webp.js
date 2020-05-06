@@ -30,7 +30,7 @@ dwebp = async (inputImage, outputImage) => {
 };
 
 module.exports.convert = async (filePath) => {
-  let frameCount = 0;
+  let frameCount = 1;
   let frameResult = true;
   const images = [];
   while (frameResult) {

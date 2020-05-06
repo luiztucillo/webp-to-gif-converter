@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import FilesUploadComponent from './components/files-upload-component';
 import Upload from './components/upload/index';
 
 class App extends Component {

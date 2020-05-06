@@ -1,4 +1,7 @@
 backend/node_modules
 backend/public
+backend/package-lock.json
 frontend/node_modules
+frontend/package-lock.json
+frontend/src/config.js
 .idea
